@@ -16,7 +16,7 @@ A Machine Learning-powered Sentiment Analysis tool that predicts whether a movie
 🔗 Live Demo: [Add your Streamlit link here]
 
 📌 Installation:
-1️⃣ Clone the repo: git clone https://github.com/yourusername/Movie-Review-Sentiment-Analyzer.git
+1️⃣ Clone the repo: git clone https://github.com/surabhi-chandrakant/Movie-Review-Sentiment-Analyzer.git
 2️⃣ Install dependencies: pip install -r requirements.txt
 3️⃣ Run locally: streamlit run app.py
 
