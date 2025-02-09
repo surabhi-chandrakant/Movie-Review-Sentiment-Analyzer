@@ -1,31 +1,28 @@
 import streamlit as st
-import joblib
-import numpy as np
+import pickle
+import pandas as pd
 
 # Load the trained model and vectorizer
-model = joblib.load("D:\\MIT study\\NLPT\\New folder\\sentiment_model.pkl")
-vectorizer = joblib.load("D:\\MIT study\\NLPT\\New folder\\tfidf_vectorizer.pkl")
+with open("D:\\MIT study\\NLPT\\New folder\\sentiment_model.pkl", "rb") as model_file:
+    model = pickle.load(model_file)
 
-# Streamlit UI
-st.title("🎬 Movie Review Sentiment Analyzer")
-st.write("Enter a movie review and check its sentiment!")
+with open("D:\\MIT study\\NLPT\\New folder\\tfidf_vectorizer.pkl", "rb") as vectorizer_file:
+    vectorizer = pickle.load(vectorizer_file)
 
-# User input
-user_input = st.text_area("Enter your review here...", "")
+st.title("Sentiment Analysis App")
+st.write("Enter a sentence and the model will predict if it's positive or negative.")
+
+user_input = st.text_area("Enter text here:")
 
 if st.button("Analyze Sentiment"):
-    if user_input.strip():
-        # Transform input using the saved vectorizer
-        input_vectorized = vectorizer.transform([user_input])
-
-        # Predict sentiment
-        prediction = model.predict(input_vectorized)[0]
-        sentiment = "😃 Positive" if prediction == 1 else "😞 Negative"
-
-        # Display result
-        st.subheader(f"Sentiment: {sentiment}")
+    if user_input:
+        text_vectorized = vectorizer.transform([user_input])
+        prediction = model.predict(text_vectorized)[0]
+        sentiment = "Positive 😀" if prediction == 1 else "Negative 😞"
+        st.subheader(f"Prediction: {sentiment}")
     else:
-        st.warning("Please enter a review before analyzing.")
+        st.warning("Please enter some text for analysis.")
+
 
 # Footer
 st.markdown("🚀 Developed by Surabhi")
